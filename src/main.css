@@ -1,0 +1,17 @@
+#helpBtn {
+    background: url(./help.svg);
+}
+
+#settingsBtn {
+    background: url(./settings.svg);
+}
+
+#statsBtn {
+    background: url(./stats.svg);
+}
+
+#helpBtn, #settingsBtn, #statsBtn {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}

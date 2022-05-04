@@ -1,0 +1,67 @@
+@import "https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css";
+
+body {
+  margin-top: 0;
+}
+
+body.isLoggedIn .showIfLoggedOut {
+    display: none;
+}
+
+body:not(.isLoggedIn) .showIfLoggedIn {
+    display: none;
+}
+
+button {
+    background: #1095c1;
+    color: white;
+}
+
+button:hover {
+    background: #20a5d1;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+    border-bottom: 1px solid var(--text-muted);
+}
+
+header h2 {
+    flex: 1;
+    text-align: center;
+    margin-top: 0.5em;
+}
+
+.header-buttons-left, .header-buttons-right {
+    display: flex;
+    width: 100px;
+    gap: 0.5em;
+}
+
+.header-buttons-left {
+    justify-content: flex-start;
+}
+
+.header-buttons-right {
+    justify-content: flex-end;
+}
+
+.screen {
+    text-align: center;
+    display: none;
+}
+
+.fork-ribbon {
+    position: fixed;
+    bottom: 55px;
+    right: -135px;
+    width: 400px;
+    text-align: center;
+    background: #ed7118;
+    padding: 0.25em;
+    transform: rotate(-45deg);
+    font: bold 15px sans-serif;
+    color: white;
+}
