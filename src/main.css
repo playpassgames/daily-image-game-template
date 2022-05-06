@@ -15,3 +15,32 @@
     height: 24px;
     cursor: pointer;
 }
+
+.tab {
+    display: none;
+}
+
+.tab-button2,
+.tab-button3,
+.tab-button4,
+.tab-button5,
+.tab-button6 {
+    display: none;
+}
+
+.tab-button1:checked ~ .tab-page1,
+.tab-button2:checked ~ .tab-page2,
+.tab-button3:checked ~ .tab-page3,
+.tab-button4:checked ~ .tab-page4,
+.tab-button5:checked ~ .tab-page5,
+.tab-button6:checked ~ .tab-page6 {
+    display: block;
+}
+
+#guessInput {
+    display: inline-block;
+}
+
+.tab img {
+    max-height: 300px;
+}

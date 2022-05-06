@@ -3,12 +3,17 @@ import * as playpass from "playpass";
 import "./boilerplate/common.css";
 import "./main.css";
 
-import * as timer from "./boilerplate/timer";
+import { Daily } from "./addons/daily/daily";
+import { maxGuesses, choices } from "./config";
 
-const DICE_EMOJI = [ "⚀", "⚁", "⚂", "⚃", "⚄", "⚅" ];
+const daily = new Daily();
+const answer = choices[Math.floor(daily.random() * choices.length)];
 
-// The dice the player rolled today
-let rolledDice = [];
+let guesses = [];
+
+function isGameComplete () {
+    return (guesses.length >= maxGuesses) || (guesses[guesses.length-1] == answer);
+}
 
 // Gets the current day number
 function getCurrentDay () {
@@ -17,15 +22,11 @@ function getCurrentDay () {
 
 // Shows either the results or gameplay screen
 async function showMainScreen () {
-    const lastDay = await playpass.storage.get("lastDay");
-    if (lastDay == getCurrentDay()) {
-        // The player has already played today, load the dice and show the results screen
-        rolledDice = await playpass.storage.get("lastDice");
+    guesses = await daily.loadObject() || [];
+    if (isGameComplete()) {
         showResultScreen();
     } else {
-        // The player hasn't yet played today, show the playing screen
-        rolledDice = [];
-        showScreen("#playingScreen");
+        showPlayingScreen();
     }
 }
 
@@ -33,35 +34,15 @@ function showResultScreen () {
     // Go to the results screen
     showScreen("#resultScreen");
 
-    // Set the first results line
-    let points = 0;
-    for (const die of rolledDice) {
-        points += DICE_EMOJI.indexOf(die) + 1;
-    }
-    document.querySelector("#resultLine1").textContent = rolledDice.join(" + ") + " = " + points;
+    document.querySelector("#resultLine1").textContent = answer;
+    document.querySelector("#resultLine2").textContent = (guesses[guesses.length-1] == answer)
+        ? `Got it in ${guesses.length} guesses!`
+        : "Better luck tomorrow!";
+}
 
-    // Set the second results line
-    let rank;
-    if (points > 16) {
-        rank = "LEGENDARY LUCK!";
-    } else if (points > 14) {
-        rank = "Golden Luck!";
-    } else if (points > 12) {
-        rank = "Favored Luck";
-    } else if (points > 10) {
-        rank = "Average Luck";
-    } else if (points > 8) {
-        rank = "Slightly Unlucky";
-    } else if (points > 6) {
-        rank = "Luckless";
-    } else if (points > 4) {
-        rank = "Unfavored Luck";
-    } else if (points > 2) {
-        rank = "Disastrous Luck!";
-    } else {
-        rank = "CURSED!";
-    }
-    document.querySelector("#resultLine2").textContent = rank;
+function showPlayingScreen () {
+    showScreen("#playingScreen");
+    updatePlayingScreen();
 }
 
 function showScreen (name) {
@@ -71,29 +52,28 @@ function showScreen (name) {
     document.querySelector(name).style.display = "inherit";
 }
 
-function onRollClick () {
-    // Generate 3 random dice
-    rolledDice = [
-        DICE_EMOJI[Math.floor(Math.random()*6)],
-        DICE_EMOJI[Math.floor(Math.random()*6)],
-        DICE_EMOJI[Math.floor(Math.random()*6)],
-    ];
+function updatePlayingScreen () {
+    for (let ii = 0; ii < guesses.length; ++ii) {
+        document.querySelector(`#guess${ii+1}`).textContent = "❌ "+guesses[ii];
+        document.querySelector(`.tab-button${ii+2}`).style.display = "inline-block";
+    }
 
-    // Save the current day
-    playpass.storage.set("lastDay", getCurrentDay());
-    playpass.storage.set("lastDice", rolledDice);
+    // Go to the most recent hint image tab
+    document.querySelector(`.tab-button${guesses.length+1}`).click();
 
-    // Go to the results screen
-    showResultScreen();
+    const remaining = maxGuesses - guesses.length;
+    document.querySelector("#guessesRemaining").textContent = remaining + " guesses remaining";
 }
 
 function onShareClick () {
     // Create a link to our game
     const link = playpass.createLink();
 
+    const emojis = guesses.map(guess => (guess == answer) ? "✅" : "❌").join("");
+
     // Share some text along with our link
     playpass.share({
-        text: "Today's dice " + rolledDice.join(" ") + " " + link,
+        text: `🏙️ Daily City #${daily.day} ${emojis} ${link}`,
     });
 }
 
@@ -122,7 +102,6 @@ async function onLoginClick () {
 function onLogoutClick () {
     playpass.account.logout();
     document.body.classList.remove("isLoggedIn");
-    rolledDice = [];
 }
 
 (async function () {
@@ -145,16 +124,63 @@ function onLogoutClick () {
         document.body.classList.add("isLoggedIn");
     }
 
-    var nextGameAt = timer.getNextGameTime();
-    setInterval(() => {
-        var hoursLeft = timer.getHoursUntil(nextGameAt);
-        var minutesLeft = timer.getMinutesUntil(nextGameAt);
-        var secondsLeft = timer.getSecondsUntil(nextGameAt);
-        document.querySelector("#timeLeft").textContent = hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s" + " until next roll";
-    }, 1000);
+    // var nextGameAt = timer.getNextGameTime();
+    // setInterval(() => {
+    //     var hoursLeft = timer.getHoursUntil(nextGameAt);
+    //     var minutesLeft = timer.getMinutesUntil(nextGameAt);
+    //     var secondsLeft = timer.getSecondsUntil(nextGameAt);
+    //     document.querySelector("#timeLeft").textContent = hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s" + " until next roll";
+    // }, 1000);
+
+    for (const choice of choices) {
+        const choiceData = document.querySelector("#choiceData");
+        const optionElement = document.createElement("option");
+        optionElement.value = choice;
+        choiceData.appendChild(optionElement);
+    }
+
+    // Update hint images
+    const answerSlug = answer
+        .replace(/[^A-Za-z0-9]/g, "-") // Replace non-alpha with hyphens
+        .replace(/-+/g, "-") // Reduce repeat runs of hyphens
+        .replace(/(^-|-$)/g, "") // Trim leading and trailing hyphens
+        .toLowerCase();
+    for (let ii = 0; ii < maxGuesses; ++ii) {
+        const image = document.querySelector(`#image-hint${ii+1}`);
+        image.src = `/images/${answerSlug}-${ii+1}.jpg`;
+    }
+
+    document.querySelector("#choiceForm").onsubmit = event => {
+        event.preventDefault();
+
+        const guessInput = document.querySelector("#guessInput");
+
+        let guess = guessInput.value.trim();
+        let correct = false;
+        if (guess != answer) {
+            const fuzzyMatches = choices.filter(choice => choice.toLowerCase().indexOf(guess.toLowerCase()) >= 0);
+            if (fuzzyMatches.length == 1) {
+                guess = fuzzyMatches[0];
+            }
+        }
+
+        guesses.push(guess);
+        daily.saveObject(guesses);
+
+        if (isGameComplete()) {
+            showResultScreen();
+
+        } else {
+            if (guesses.length < maxGuesses) {
+                guessInput.value = "";
+                updatePlayingScreen();
+            } else {
+                showResultScreen();
+            }
+        }
+    };
 
     // Add UI event listeners
-    document.querySelector("#rollBtn").onclick = onRollClick;
     document.querySelector("#shareBtn").onclick = onShareClick;
     document.querySelector("#helpBtn").onclick = onHelpClick;
     document.querySelector("#helpBackBtn").onclick = onBackClick;
