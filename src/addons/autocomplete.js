@@ -1,7 +1,7 @@
+/*the autocomplete function takes two arguments, the text field element and an array of possible autocompleted values:*/
 export function autocomplete(inp, arr) {
-    /*the autocomplete function takes two arguments,
-    the text field element and an array of possible autocompleted values:*/
     var currentFocus;
+
     /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", function(e) {
         var a, b, i, val = this.value;
@@ -40,6 +40,7 @@ export function autocomplete(inp, arr) {
           }
         }
     });
+
     /*execute a function presses a key on the keyboard:*/
     inp.addEventListener("keydown", function(e) {
         var x = document.getElementById(this.id + "autocomplete-list");
@@ -65,6 +66,7 @@ export function autocomplete(inp, arr) {
           }
         }
     });
+
     function addActive(x) {
       /*a function to classify an item as "active":*/
       if (!x) return false;
@@ -75,24 +77,27 @@ export function autocomplete(inp, arr) {
       /*add class "autocomplete-active":*/
       x[currentFocus].classList.add("autocomplete-active");
     }
+
     function removeActive(x) {
       /*a function to remove the "active" class from all autocomplete items:*/
       for (var i = 0; i < x.length; i++) {
         x[i].classList.remove("autocomplete-active");
       }
     }
+
     function closeAllLists(elmnt) {
       /*close all autocomplete lists in the document,
       except the one passed as an argument:*/
       var x = document.getElementsByClassName("autocomplete-items");
       for (var i = 0; i < x.length; i++) {
         if (elmnt != x[i] && elmnt != inp) {
-        x[i].parentNode.removeChild(x[i]);
+          x[i].parentNode.removeChild(x[i]);
+        }
       }
     }
-  }
-  /*execute a function when someone clicks in the document:*/
-  document.addEventListener("click", function (e) {
-      closeAllLists(e.target);
-  });
-  }
+
+    /*execute a function when someone clicks in the document:*/
+    document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+    });
+}
