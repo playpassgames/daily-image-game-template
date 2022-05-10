@@ -17,11 +17,6 @@ function isGameComplete () {
     return (guesses.length >= maxGuesses) || (guesses[guesses.length-1] == answer);
 }
 
-// Gets the current day number
-function getCurrentDay () {
-    return Math.floor(Date.now() / (1000 * 60 * 60 * 24));
-}
-
 // Shows either the results or gameplay screen
 async function showMainScreen () {
     guesses = await daily.loadObject() || [];
@@ -153,7 +148,6 @@ function onLogoutClick () {
         const guessInput = document.querySelector("#guessInput");
 
         let guess = guessInput.value.trim();
-        let correct = false;
         if (guess != answer) {
             const fuzzyMatches = choices.filter(choice => choice.toLowerCase().indexOf(guess.toLowerCase()) >= 0);
             if (fuzzyMatches.length == 1) {
