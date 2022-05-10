@@ -47,10 +47,11 @@
     </div>
 
     <p>
-      <form id="choiceForm">
-        <input list="choiceData" id="guessInput" autocomplete="off" required placeholder="Guess the city"/>
-        <datalist id="choiceData"></datalist>
-        <button type="submit">OK</button>
+      <form id="choiceForm" autocomplete="off">
+        <div class="autocomplete">
+          <input id="guessInput" type="text" required placeholder="Guess the city"/>
+          <button type="submit">OK</button>
+        </div>
       </form>
     </p>
 

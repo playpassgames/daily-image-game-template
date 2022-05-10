@@ -6,6 +6,8 @@ import "./main.css";
 import { Daily } from "./addons/daily/daily";
 import { maxGuesses, choices } from "./config";
 
+import { autocomplete } from './addons/autocomplete';
+
 const daily = new Daily();
 const answer = choices[Math.floor(daily.random() * choices.length)];
 
@@ -107,7 +109,7 @@ function onLogoutClick () {
 (async function () {
     // Initialize the Playpass SDK
     await playpass.init({
-        gameId: "YOUR_GAME_ID", // Do not edit!
+        gameId: "fd6f1146-0536-43d6-a8ae-242541b3d388", // Do not edit!
     });
 
     // Take new users to help screen first
@@ -132,12 +134,7 @@ function onLogoutClick () {
     //     document.querySelector("#timeLeft").textContent = hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s" + " until next roll";
     // }, 1000);
 
-    for (const choice of choices) {
-        const choiceData = document.querySelector("#choiceData");
-        const optionElement = document.createElement("option");
-        optionElement.value = choice;
-        choiceData.appendChild(optionElement);
-    }
+    autocomplete(document.querySelector("#guessInput"), choices)
 
     // Update hint images
     const answerSlug = answer
