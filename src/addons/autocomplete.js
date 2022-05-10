@@ -17,7 +17,7 @@ export function autocomplete(inp, arr) {
         this.parentNode.appendChild(a);
         /*for each item in the array...*/
         for (i = 0; i < arr.length; i++) {
-          /*check if the item starts with the same letters as the text field value:*/
+          /* cut these strings into pieces, this is my last resort */
           var start = arr[i].toUpperCase().indexOf(val.toUpperCase());
           if (start !== -1) {
             /*create a DIV element for each matching element:*/
