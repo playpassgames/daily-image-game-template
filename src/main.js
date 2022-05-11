@@ -132,7 +132,7 @@ function onLogoutClick () {
         .toLowerCase();
     for (let ii = 0; ii < maxGuesses; ++ii) {
         const image = document.querySelector(`#image-hint${ii+1}`);
-        image.src = `/images/${answerSlug}-${ii+1}.jpg`;
+        image.src = `../content/images/${answerSlug}-${ii+1}.jpg`;
     }
 
     document.querySelector("#choiceForm").onsubmit = event => {
