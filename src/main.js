@@ -1,12 +1,13 @@
 import * as playpass from "playpass";
 
 import "./boilerplate/common.css";
+import "./components/autocomplete-element.css";
 import "./main.css";
 
-import { Daily } from "./addons/daily/daily";
+import { Daily } from "./boilerplate/daily";
 import { maxGuesses, choices } from "./config";
 
-import { autocomplete } from './addons/autocomplete';
+import { autocomplete } from './components/autocomplete-element';
 
 const daily = new Daily();
 const answer = choices[Math.floor(daily.random() * choices.length)];
@@ -120,14 +121,6 @@ function onLogoutClick () {
     if (playpass.account.isLoggedIn()) {
         document.body.classList.add("isLoggedIn");
     }
-
-    // var nextGameAt = timer.getNextGameTime();
-    // setInterval(() => {
-    //     var hoursLeft = timer.getHoursUntil(nextGameAt);
-    //     var minutesLeft = timer.getMinutesUntil(nextGameAt);
-    //     var secondsLeft = timer.getSecondsUntil(nextGameAt);
-    //     document.querySelector("#timeLeft").textContent = hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s" + " until next roll";
-    // }, 1000);
 
     autocomplete(document.querySelector("#guessInput"), choices)
 
