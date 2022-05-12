@@ -6,6 +6,7 @@ import "./main.css";
 
 import "./screens/gameScreen/game-screen";
 import "./screens/helpScreen/help-screen";
+import "./screens/settingsScreen/settings-screen";
 import "./screens/statsScreen/stats-screen";
 
 import { showScreen } from "./boilerplate/screens";
@@ -55,11 +56,7 @@ function onStatsClick () {
 }
 
 function onSettingsClick () {
-    showScreen("#settingsScreen");
-}
-
-function onBackClick () {
-    showMainScreen();
+    showScreen("#settings-screen");
 }
 
 async function onLoginClick () {
@@ -93,7 +90,4 @@ function onLogoutClick () {
     document.querySelector("#helpBtn").onclick = onHelpClick;
     document.querySelector("#statsBtn").onclick = onStatsClick;
     document.querySelector("#settingsBtn").onclick = onSettingsClick;
-    document.querySelector("#loginBtn").onclick = onLoginClick;
-    document.querySelector("#logoutBtn").onclick = onLogoutClick;
-    document.querySelector("#settingsBackBtn").onclick = onBackClick;
 })();
