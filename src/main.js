@@ -51,7 +51,7 @@ function onHelpClick () {
 }
 
 function onStatsClick () {
-    showScreen("#statsScreen");
+    showScreen("#stats-screen");
 }
 
 function onSettingsClick () {
@@ -92,7 +92,6 @@ function onLogoutClick () {
     document.querySelector("#shareBtn").onclick = onShareClick;
     document.querySelector("#helpBtn").onclick = onHelpClick;
     document.querySelector("#statsBtn").onclick = onStatsClick;
-    document.querySelector("#statsBackBtn").onclick = onBackClick;
     document.querySelector("#settingsBtn").onclick = onSettingsClick;
     document.querySelector("#loginBtn").onclick = onLoginClick;
     document.querySelector("#logoutBtn").onclick = onLogoutClick;
