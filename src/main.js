@@ -58,7 +58,7 @@ function onSettingsClick () {
     showMainScreen();
 
     // Add UI event listeners
-    document.querySelector("#helpBtn").onclick = onHelpClick;
-    document.querySelector("#statsBtn").onclick = onStatsClick;
-    document.querySelector("#settingsBtn").onclick = onSettingsClick;
+    document.querySelector("game-header .button[name=help]").onclick = onHelpClick;
+    document.querySelector("game-header .button[name=stats]").onclick = onStatsClick;
+    document.querySelector("game-header .button[name=settings]").onclick = onSettingsClick;
 })();

@@ -1,19 +1,28 @@
-#helpBtn {
+game-header .button[name="help"] {
     background: url(./assets/help.svg);
 }
 
-#settingsBtn {
+game-header .button[name="settings"] {
     background: url(./assets/settings.svg);
 }
 
-#statsBtn {
+game-header .button[name="stats"]{
     background: url(./assets/stats.svg);
 }
 
-#helpBtn, #settingsBtn, #statsBtn {
+game-header .button {
     width: 24px;
     height: 24px;
     cursor: pointer;
+}
+
+game-header h2 {
+    margin: 0;
+}
+
+/* prefer center text alignment in our game design */
+screen-router > * {
+    text-align: center;
 }
 
 .tab {

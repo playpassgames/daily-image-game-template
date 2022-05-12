@@ -8,98 +8,98 @@
 </head>
 <body>
 
-<header>
-  <div class="header-buttons-left">
-    <div id="helpBtn"></div>
-  </div>
-  <h2>🏙️  Daily City</h2>
-  <div class="header-buttons-right">
-    <div id="statsBtn"></div>
-    <div id="settingsBtn"></div>
-  </div>
-</header>
+  <game-header>
+    <div class="button" name="help" slot="buttons-left"></div>
+    <h2 slot="brand">🏙️  Daily City</h2>
+    <div class="button" name="stats" slot="buttons-right"></div>
+    <div class="button" name="settings" slot="buttons-right"></div>
+  </game-header>
 
-<screen-router>
-  <div id="game-screen" slot="screen">
-    <input class="tab-button tab-button1" type="radio" name="tabs" checked />
-    <input class="tab-button tab-button2" type="radio" name="tabs" />
-    <input class="tab-button tab-button3" type="radio" name="tabs" />
-    <input class="tab-button tab-button4" type="radio" name="tabs" />
-    <input class="tab-button tab-button5" type="radio" name="tabs" />
-    <input class="tab-button tab-button6" type="radio" name="tabs" />
-
-    <div class="tab tab-page1">
-      <img id="image-hint1"/>
-    </div>
-    <div class="tab tab-page2">
-      <img id="image-hint2"/>
-    </div>
-    <div class="tab tab-page3">
-      <img id="image-hint3"/>
-    </div>
-    <div class="tab tab-page4">
-      <img id="image-hint4"/>
-    </div>
-    <div class="tab tab-page5">
-      <img id="image-hint5"/>
-    </div>
-    <div class="tab tab-page6">
-      <img id="image-hint6"/>
+  <screen-router>
+    <div slot="load-spinner">
+      &#9676;
     </div>
 
-    <p>
-      <form id="choiceForm" autocomplete="off">
-        <div class="autocomplete">
-          <input id="guessInput" type="text" required placeholder="Guess the city"/>
-          <button type="submit">OK</button>
-        </div>
-      </form>
-    </p>
+    <div id="game-screen" slot="screen">
+      <input class="tab-button tab-button1" type="radio" name="tabs" checked />
+      <input class="tab-button tab-button2" type="radio" name="tabs" />
+      <input class="tab-button tab-button3" type="radio" name="tabs" />
+      <input class="tab-button tab-button4" type="radio" name="tabs" />
+      <input class="tab-button tab-button5" type="radio" name="tabs" />
+      <input class="tab-button tab-button6" type="radio" name="tabs" />
 
-    <h4 id="guessesRemaining">6 guesses remaining</h4>
-    <p id="guess1"></p>
-    <p id="guess2"></p>
-    <p id="guess3"></p>
-    <p id="guess4"></p>
-    <p id="guess5"></p>
-    <p id="guess6"></p>
-  </div>
+      <div class="tab tab-page1">
+        <img id="image-hint1"/>
+      </div>
+      <div class="tab tab-page2">
+        <img id="image-hint2"/>
+      </div>
+      <div class="tab tab-page3">
+        <img id="image-hint3"/>
+      </div>
+      <div class="tab tab-page4">
+        <img id="image-hint4"/>
+      </div>
+      <div class="tab tab-page5">
+        <img id="image-hint5"/>
+      </div>
+      <div class="tab tab-page6">
+        <img id="image-hint6"/>
+      </div>
 
-  <div id="results-screen" slot="screen">
-    <p>Today's city was...</p>
-    <h1 id="resultLine1">New York, NY</h1>
-    <h2 id="resultLine2">Good job!</h2>
-    <button name="share">🗨️ Share</button>
-    <p><span id="timeLeft"></span></p>
-  </div>
+      <p>
+        <form id="choiceForm" autocomplete="off">
+          <div class="autocomplete">
+            <input id="guessInput" type="text" required placeholder="Guess the city"/>
+            <button type="submit">OK</button>
+          </div>
+        </form>
+      </p>
 
-  <div id="help-screen" slot="screen">
-    <h2>Welcome to Daily City!</h2>
-    <p>This is an example of how to use the Playpass SDK to build a simple daily level game.</p>
-    <p>Each day, try to guess the city in the pictures!</p>
-    <button name="back">Continue</button>
-
-    <a class="fork-ribbon" href="https://github.com/playpassgames/playpass-game-template" target="_blank">Fork with Playpass</a>
-  </div>
-
-  <div id="stats-screen" slot="screen">
-    <h2>Stats</h2>
-    <p id="winStats"></p>
-    <button id="statsBackBtn" name="back">Back</button>
-  </div>
-
-  <div id="settings-screen" slot="screen">
-    <h2>Settings</h2>
-    <div class="showIfLoggedOut">
-      <div>Login to save or transfer your game progress.</div>
-      <button name="login">📱 Login</button>
+      <h4 id="guessesRemaining">6 guesses remaining</h4>
+      <p id="guess1"></p>
+      <p id="guess2"></p>
+      <p id="guess3"></p>
+      <p id="guess4"></p>
+      <p id="guess5"></p>
+      <p id="guess6"></p>
     </div>
-    <div class="showIfLoggedIn">
-      <div>You are logged in, your progress will be saved.</div>
-      <button name="logout">Logout</button>
+
+    <div id="results-screen" slot="screen">
+      <p>Today's city was...</p>
+      <h1 id="resultLine1">New York, NY</h1>
+      <h2 id="resultLine2">Good job!</h2>
+      <button name="share">🗨️ Share</button>
+      <p><span id="timeLeft"></span></p>
     </div>
-    <button name="back">Back</button>
-  </div>
-</screen-router>
+
+    <div id="help-screen" slot="screen">
+      <h2>Welcome to Daily City!</h2>
+      <p>This is an example of how to use the Playpass SDK to build a simple daily level game.</p>
+      <p>Each day, try to guess the city in the pictures!</p>
+      <button name="back">Continue</button>
+
+      <a class="fork-ribbon" href="https://github.com/playpassgames/playpass-game-template" target="_blank">Fork with Playpass</a>
+    </div>
+
+    <div id="stats-screen" slot="screen">
+      <h2>Stats</h2>
+      <p id="winStats"></p>
+      <button id="statsBackBtn" name="back">Back</button>
+    </div>
+
+    <div id="settings-screen" slot="screen">
+      <h2>Settings</h2>
+      <div class="showIfLoggedOut">
+        <div>Login to save or transfer your game progress.</div>
+        <button name="login">📱 Login</button>
+      </div>
+      <div class="showIfLoggedIn">
+        <div>You are logged in, your progress will be saved.</div>
+        <button name="logout">Logout</button>
+      </div>
+      <button name="back">Back</button>
+    </div>
+  </screen-router>
 </body>
 </html>
