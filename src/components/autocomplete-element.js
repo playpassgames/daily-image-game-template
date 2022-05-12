@@ -1,3 +1,5 @@
+import "./autocomplete-element.css";
+
 /*the autocomplete function takes two arguments, the text field element and an array of possible autocompleted values:*/
 export function autocomplete(inp, arr) {
     var currentFocus;

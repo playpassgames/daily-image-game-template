@@ -4,7 +4,6 @@ import "./boilerplate/common.css";
 import "./boilerplate/header.js";
 
 import "./boilerplate/screens";
-import "./components/autocomplete-element.css";
 
 import "./screens/gameScreen/game-screen";
 import "./screens/resultsScreen/results-screen";
