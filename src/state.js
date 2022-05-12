@@ -1,0 +1,66 @@
+import * as playpass from "playpass";
+import { State } from "./boilerplate/state";
+import UserModel from "./models/userModel";
+import DailyModel from "./models/dailyModel";
+
+import { choices } from "./config";
+
+const MAX_ATTEMPTS = 6;
+
+const state = new State(
+    "daily",
+    new UserModel(MAX_ATTEMPTS),
+    new DailyModel(Date.parse("2022-04-21T12:00:00")),
+); 
+
+export default {
+    store: null,
+    currentGuess: "",
+    correctAnswer: null,
+    
+    async init() {
+        this.store = await state.loadObject();
+        this.correctAnswer = choices[this.store.day % choices.length];
+    },
+    get attempts() {
+        return MAX_ATTEMPTS;
+    },
+    isSolved() {
+        return this.store.guesses[this.store.guesses.length - 1] === this.getCurrentAnswer();
+    },
+    isDone() {
+        return this.store.results.length === this.attempts || this.isSolved();
+    },
+    getCurrentAnswer() {
+        const word = this.correctAnswer;
+        if (!word) {
+            choices[0];
+        }
+        return word.toUpperCase();
+    },
+    submit() {
+        this.store.guesses.push(this.currentGuess);
+
+        if (!this.isDone()) {
+            this.currentGuess = "";
+        }
+
+        if (this.isSolved()) {
+            this.store.wins[this.store.guesses.length - 1] += 1;
+        }
+
+        this.save();
+    },
+    async login() {
+        if (await playpass.account.login()) {
+            document.body.classList.add("isLoggedIn");
+        }
+    },
+    async logout() {
+        playpass.account.logout();
+        document.body.classList.remove("isLoggedIn");
+    },
+    save() {
+        state.saveObject(this.store);
+    }
+}

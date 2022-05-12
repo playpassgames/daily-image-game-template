@@ -1,5 +1,3 @@
-export const maxGuesses = 6;
-
 export const choices = [
     "Montgomery, AL",
     "Juneau, AK",
@@ -22,7 +20,6 @@ export const choices = [
     "Augusta, ME",
     "Annapolis, MD",
     "Boston, MA",
-    "Lansing, MI",
     "Saint Paul, MN",
     "Jackson, MS",
     "Jefferson City, MO",

@@ -1,25 +1,32 @@
-import * as playpass from "playpass";
+import { Model } from "../boilerplate/state";
 import { getCurrentDay, getDay } from "./timer";
 
-export class Daily {
+/**
+ * A daily state manager
+ */
+export class DailyModel extends Model {
     constructor (firstDate) {
-        if (!firstDate) {
-            firstDate = new Date("2022-01-01");
-        }
+        super();
         this.day = getCurrentDay() - getDay(firstDate);
     }
 
-    /** Loads an object from storage, returning null if there was no object previously saved today. */
-    async loadObject () {
-        const daily = await playpass.storage.get("daily");
-        return (daily && daily.day == this.day) ? daily.state : null;
+    data() {
+        return {
+            day: this.day
+        };
     }
 
-    /** Saves an object to storage, which will expire the next day. */
-    async saveObject (state) {
-        await playpass.storage.set("daily", { day: this.day, state: state });
+    onLoad(state) {
+        if (state.day !== this.day) {
+            return {
+                ...state,
+                ...this.data(),
+            };
+        }
+        
+        return state;
     }
-
+    
     /** Gets a random number between 0 and 1 unique to this day. */
     random () {
         return ((1103515245*this.day + 12345) >>> 0) / 0xffffffff;
