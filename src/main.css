@@ -1,3 +1,7 @@
+body {
+    padding: 0 1em;
+}
+
 game-header .button[name="help"] {
     background: url(./assets/help.svg);
 }

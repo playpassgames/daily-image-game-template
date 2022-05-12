@@ -1,17 +1,21 @@
 import * as playpass from "playpass";
 
 import "./boilerplate/common.css";
+import "./boilerplate/header.js";
+
+import "./boilerplate/screens";
 import "./components/autocomplete-element.css";
-import "./main.css";
 
 import "./screens/gameScreen/game-screen";
-import "./screens/helpScreen/help-screen";
 import "./screens/resultsScreen/results-screen";
-import "./screens/settingsScreen/settings-screen";
+import "./screens/helpScreen/help-screen";
 import "./screens/statsScreen/stats-screen";
+import "./screens/settingsScreen/settings-screen";
 
 import { showScreen } from "./boilerplate/screens";
 import state from "./state";
+
+import "./main.css";
 
 // Shows either the results or gameplay screen
 async function showMainScreen () {
