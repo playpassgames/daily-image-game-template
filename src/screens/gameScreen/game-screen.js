@@ -2,7 +2,7 @@ import * as playpass from "playpass";
 import { asyncHandler, showScreen } from "../../boilerplate/screens";
 import state from "../../state";
 
-import { choices } from "../../config";
+import { choices } from "../../../content/configuration/config";
 import { autocomplete } from '../../components/autocomplete-element';
 
 const template = document.querySelector("#game-screen");

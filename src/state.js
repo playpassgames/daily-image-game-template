@@ -3,7 +3,7 @@ import { State } from "./boilerplate/state";
 import UserModel from "./models/userModel";
 import DailyModel from "./models/dailyModel";
 
-import { choices } from "./config";
+import { choices } from "../content/configuration/config";
 
 const MAX_ATTEMPTS = 6;
 
