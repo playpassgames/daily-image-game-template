@@ -42,8 +42,7 @@ template.addEventListener(
                 }
             }
 
-            state.currentGuess = guess;
-            state.submit();
+            state.submit(guess);
 
             if (state.isDone()) {
                 showScreen("#results-screen");

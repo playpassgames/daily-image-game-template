@@ -38,12 +38,8 @@ export default {
         }
         return word;
     },
-    submit() {
-        this.store.guesses.push(this.currentGuess);
-
-        if (!this.isDone()) {
-            this.currentGuess = "";
-        }
+    submit(currentGuess) {
+        this.store.guesses.push(currentGuess);
 
         if (this.isSolved()) {
             this.store.wins[this.store.guesses.length - 1] += 1;
