@@ -29,7 +29,7 @@ export default {
         return this.store.guesses[this.store.guesses.length - 1] === this.getCurrentAnswer();
     },
     isDone() {
-        return this.store.results.length >= this.attempts || this.isSolved();
+        return this.store.guesses.length >= this.attempts || this.isSolved();
     },
     getCurrentAnswer() {
         const word = this.correctAnswer;

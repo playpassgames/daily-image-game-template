@@ -5,7 +5,6 @@ export default class extends DailyModel {
         return {
             ...super.data(),
             guesses: [],
-            results: [],
         };
     }
 }
