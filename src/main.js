@@ -6,6 +6,7 @@ import "./main.css";
 
 import "./screens/gameScreen/game-screen";
 import "./screens/helpScreen/help-screen";
+import "./screens/resultsScreen/results-screen";
 import "./screens/settingsScreen/settings-screen";
 import "./screens/statsScreen/stats-screen";
 
@@ -22,29 +23,11 @@ async function showMainScreen () {
 }
 
 function showResultScreen () {
-    // Go to the results screen
-    showScreen("#resultScreen");
-
-    document.querySelector("#resultLine1").textContent = state.getCurrentAnswer();
-    document.querySelector("#resultLine2").textContent = state.isSolved()
-        ? `Got it in ${state.store.guesses.length} guesses!`
-        : "Better luck tomorrow!";
+    showScreen("#results-screen");
 }
 
 function showPlayingScreen () {
     showScreen("#game-screen");
-}
-
-function onShareClick () {
-    // Create a link to our game
-    const link = playpass.createLink();
-
-    const emojis = state.isSolved() ? "✅" : "❌".join("");
-
-    // Share some text along with our link
-    playpass.share({
-        text: `🏙️ Daily City #${state.store.day.toString()} ${emojis} ${link}`,
-    });
 }
 
 function onHelpClick () {
@@ -57,17 +40,6 @@ function onStatsClick () {
 
 function onSettingsClick () {
     showScreen("#settings-screen");
-}
-
-async function onLoginClick () {
-    if (await playpass.account.login()) {
-        document.body.classList.add("isLoggedIn");
-    }
-}
-
-function onLogoutClick () {
-    playpass.account.logout();
-    document.body.classList.remove("isLoggedIn");
 }
 
 (async function () {
@@ -86,7 +58,6 @@ function onLogoutClick () {
     showMainScreen();
 
     // Add UI event listeners
-    document.querySelector("#shareBtn").onclick = onShareClick;
     document.querySelector("#helpBtn").onclick = onHelpClick;
     document.querySelector("#statsBtn").onclick = onStatsClick;
     document.querySelector("#settingsBtn").onclick = onSettingsClick;

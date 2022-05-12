@@ -8,16 +8,17 @@
 </head>
 <body>
 
-  <header>
-    <div class="header-buttons-left">
-      <div id="helpBtn"></div>
-    </div>
-    <h2>🏙️  Daily City</h2>
-    <div class="header-buttons-right">
-      <div id="statsBtn"></div>
-      <div id="settingsBtn"></div>
-    </div>
-  </header>
+<header>
+  <div class="header-buttons-left">
+    <div id="helpBtn"></div>
+  </div>
+  <h2>🏙️  Daily City</h2>
+  <div class="header-buttons-right">
+    <div id="statsBtn"></div>
+    <div id="settingsBtn"></div>
+  </div>
+</header>
+
 <screen-router>
   <div id="game-screen" slot="screen">
     <input class="tab-button tab-button1" type="radio" name="tabs" checked />
@@ -64,11 +65,11 @@
     <p id="guess6"></p>
   </div>
 
-  <div class="screen" id="resultScreen">
+  <div id="results-screen" slot="screen">
     <p>Today's city was...</p>
     <h1 id="resultLine1">New York, NY</h1>
     <h2 id="resultLine2">Good job!</h2>
-    <button id="shareBtn">🗨️ Share</button>
+    <button name="share">🗨️ Share</button>
     <p><span id="timeLeft"></span></p>
   </div>
 

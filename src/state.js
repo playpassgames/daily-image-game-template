@@ -29,14 +29,14 @@ export default {
         return this.store.guesses[this.store.guesses.length - 1] === this.getCurrentAnswer();
     },
     isDone() {
-        return this.store.results.length === this.attempts || this.isSolved();
+        return this.store.results.length >= this.attempts || this.isSolved();
     },
     getCurrentAnswer() {
         const word = this.correctAnswer;
         if (!word) {
             choices[0];
         }
-        return word.toUpperCase();
+        return word;
     },
     submit() {
         this.store.guesses.push(this.currentGuess);
