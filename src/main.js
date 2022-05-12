@@ -5,6 +5,7 @@ import "./components/autocomplete-element.css";
 import "./main.css";
 
 import "./screens/gameScreen/game-screen";
+import "./screens/helpScreen/help-screen";
 import "./screens/statsScreen/stats-screen";
 
 import { showScreen } from "./boilerplate/screens";
@@ -46,7 +47,7 @@ function onShareClick () {
 }
 
 function onHelpClick () {
-    showScreen("#helpScreen");
+    showScreen("#help-screen");
 }
 
 function onStatsClick () {
@@ -90,7 +91,6 @@ function onLogoutClick () {
     // Add UI event listeners
     document.querySelector("#shareBtn").onclick = onShareClick;
     document.querySelector("#helpBtn").onclick = onHelpClick;
-    document.querySelector("#helpBackBtn").onclick = onBackClick;
     document.querySelector("#statsBtn").onclick = onStatsClick;
     document.querySelector("#statsBackBtn").onclick = onBackClick;
     document.querySelector("#settingsBtn").onclick = onSettingsClick;
