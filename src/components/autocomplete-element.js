@@ -49,7 +49,7 @@ export class Autocomplete extends HTMLElement {
     });
 
     /*execute a function when someone clicks in the document:*/
-    document.addEventListener("click", (e) => {
+    document.addEventListener("click", () => {
       this.clearOptions();
     });
   }
