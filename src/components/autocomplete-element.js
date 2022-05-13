@@ -59,7 +59,7 @@ export class Autocomplete extends HTMLElement {
       <strong>${word.substr(0, matched.length)}</strong>${word.substr(matched.length)}
     `;
 
-    element.addEventListener("click", (e) => {
+    element.addEventListener("click", () => {
       e.stopPropagation();
 
       const input = this.querySelector("input[name=text]");
