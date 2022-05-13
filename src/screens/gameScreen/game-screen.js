@@ -3,7 +3,6 @@ import { asyncHandler, showScreen } from "../../boilerplate/screens";
 import state from "../../state";
 
 import { choices } from "../../../content/configuration/config";
-import { autocomplete } from '../../components/autocomplete-element';
 
 const template = document.querySelector("#game-screen");
 template.addEventListener(
@@ -15,8 +14,6 @@ template.addEventListener(
             playpass.storage.set("sawTutorial", true);
             showScreen("#help-screen");
         }
-
-        autocomplete(template.querySelector("#guessInput"), choices);
 
         // Update hint images
         const answerSlug = state.getCurrentAnswer()
