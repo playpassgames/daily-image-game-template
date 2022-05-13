@@ -2,7 +2,7 @@ import * as playpass from "playpass";
 import { asyncHandler, showScreen } from "../../boilerplate/screens";
 import state from "../../state";
 
-import { choices } from "../../../content/configuration/config";
+import { choices } from "../../../content/autocomplete.json";
 
 const template = document.querySelector("#game-screen");
 template.addEventListener(
@@ -26,17 +26,17 @@ template.addEventListener(
             image.src = `../../../content/images/${answerSlug}-${ii+1}.jpg`;
         }
 
-        template.querySelector("#choiceForm").onsubmit = event => {
+        const guessInput = template.querySelector("auto-complete");
+        guessInput.choices = choices;
+
+        template.querySelector("form").onsubmit = event => {
             event.preventDefault();
 
-            const guessInput = template.querySelector("#guessInput");
-
-            let guess = guessInput.value.trim();
-            if (guess != state.getCurrentAnswer()) {
-                const fuzzyMatches = choices.filter(choice => choice.toLowerCase().indexOf(guess.toLowerCase()) >= 0);
-                if (fuzzyMatches.length == 1) {
-                    guess = fuzzyMatches[0];
-                }
+            const guess = guessInput.value?.trim();
+            
+            // ignore empty forms
+            if (!guess) {
+                return;
             }
 
             state.submit(guess);

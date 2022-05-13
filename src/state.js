@@ -3,7 +3,7 @@ import { State } from "./boilerplate/state";
 import UserModel from "./models/userModel";
 import DailyModel from "./models/dailyModel";
 
-import { choices } from "../content/configuration/config";
+import { choices } from "../content/autocomplete.json";
 
 const MAX_ATTEMPTS = 6;
 
@@ -26,7 +26,7 @@ export default {
         return MAX_ATTEMPTS;
     },
     isSolved() {
-        return this.store.guesses[this.store.guesses.length - 1] === this.getCurrentAnswer();
+        return this.store.guesses[this.store.guesses.length - 1]?.toUpperCase() === this.getCurrentAnswer().toUpperCase();
     },
     isDone() {
         return this.store.guesses.length >= this.attempts || this.isSolved();

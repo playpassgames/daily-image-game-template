@@ -2,8 +2,9 @@ import * as playpass from "playpass";
 
 import "./boilerplate/common.css";
 import "./boilerplate/header.js";
-
 import "./boilerplate/screens";
+
+import "./components/autocomplete-element";
 
 import "./screens/gameScreen/game-screen";
 import "./screens/resultsScreen/results-screen";
