@@ -9,7 +9,7 @@ Preview: https://daily-city.playpass.games/
 Clone this template by running:
 
 ```shell
-playpass create --template playpassgames/playpass-game-template
+playpass create --template playpassgames/daily-image-game-template
 ```
 
 For more info about using Playpass, see the [quickstart guide](https://docs.playpass.games/).
