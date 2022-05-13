@@ -1,8 +1,8 @@
-# Daily Dice project template
+# Daily Image project template
 
 This is an example of how to use the Playpass SDK to build a simple daily level game.
 
-Preview: https://base--template.playpass.games
+Preview: https://daily-city.playpass.games/
 
 ## Setup
 
