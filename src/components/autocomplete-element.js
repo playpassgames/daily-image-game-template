@@ -31,7 +31,10 @@ export class Autocomplete extends HTMLElement {
       this.choices.filter(
         (word) => {
           const sanitized = word.toUpperCase();
-          return sanitized.startsWith(val);
+
+          /* cut these strings into pieces, this is my last resort */
+          var start = sanitized.indexOf(val.toUpperCase());
+          return start !== -1;
         }
       ).map(
         (word) => this.createOption(word, val),
@@ -55,22 +58,27 @@ export class Autocomplete extends HTMLElement {
     const element = document.createElement('li');
     element.classList.add('option');
 
-    element.innerHTML = `
-      <strong>${word.substr(0, matched.length)}</strong>${word.substr(matched.length)}
-    `;
+    /* cut these strings into pieces, this is my last resort */
+    var start = word.toUpperCase().indexOf(matched.toUpperCase());
+    if (start !== -1) {
+      /*make the matching letters bold:*/
+      element.innerHTML += word.substr(0, start);
+      element.innerHTML += "<strong>" + word.substr(start, matched.length) + "</strong>";
+      element.innerHTML += word.substr(start + matched.length);
 
-    element.addEventListener("click", () => {
-      e.stopPropagation();
+      element.addEventListener("click", (e) => {
+        e.stopPropagation();
 
-      const input = this.querySelector("input[name=text]");
+        const input = this.querySelector("input[name=text]");
 
-      input.value = word;
-      this.value = input.value;
+        input.value = word;
+        this.value = input.value;
 
-      this.clearOptions();
-    });
+        this.clearOptions();
+      });
 
-    return element;
+      return element;
+    }
   }
 
   clearOptions() {
