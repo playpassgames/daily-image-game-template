@@ -62,14 +62,19 @@ template.addEventListener(
 );
 
 function updatePlayingScreen () {
+    template.querySelector(`#guesses`).innerHTML = "";
+
+    const remaining = state.attempts - state.store.guesses.length;
+    template.querySelector("#guessesRemaining").textContent = remaining + " guesses remaining";
+
     for (let ii = 0; ii < state.store.guesses.length; ++ii) {
-        template.querySelector(`#guess${ii+1}`).textContent = "❌ "+ state.store.guesses[ii];
+        const guess = document.createElement("p");
+        guess.id = `#guess${ii+1}`; 
+        guess.textContent = "❌ "+ state.store.guesses[ii];    
+        template.querySelector(`#guesses`).appendChild(guess)        
         template.querySelector(`.tab-button${ii+2}`).style.display = "inline-block";
     }
 
     // Go to the most recent hint image tab
     template.querySelector(`.tab-button${state.store.guesses.length+1}`).click();
-
-    const remaining = state.attempts - state.store.guesses.length;
-    template.querySelector("#guessesRemaining").textContent = remaining + " guesses remaining";
 }
