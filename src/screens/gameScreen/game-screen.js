@@ -23,7 +23,7 @@ template.addEventListener(
             .toLowerCase();
         for (let ii = 0; ii < state.attempts; ++ii) {
             const image = template.querySelector(`#image-hint${ii+1}`);
-            image.src = `../../../content/images/${answerSlug}-${ii+1}.jpg`;
+            image.src = new URL(`../../../content/images/${answerSlug}-${ii+1}.jpg`, import.meta.url).href;
         }
 
         const guessInput = template.querySelector("auto-complete");
